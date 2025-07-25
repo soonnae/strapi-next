@@ -48,7 +48,8 @@ module.exports = async (ctx, next) => {
           return strapi.plugins.upload.controllers.upload.upload(ctx);
         }));
 
-        return ctx.send(resBody);
+        // Ensure the response body is properly escaped or sanitized
+        return ctx.send(_.escape(resBody));
       }
 
       return await strapi.plugins[source].controllers[controller.toLowerCase()][action](ctx);
